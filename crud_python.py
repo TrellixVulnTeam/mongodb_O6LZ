@@ -1,7 +1,12 @@
 import crud.crud
 
-mydata = {'Name':"Lida"}
-ejemplo = crud.crud.insert(mydata)
+mydata = {'Name':"pruebaconeccioncerrada"}
+connection = "mongodb+srv://juangui:Juan5157@clustertesting-yew86.azure.mongodb.net/test?retryWrites=true"
+db= "mydatabase"
+collection = "mycollection"
+
+ejemplo = crud.crud.insert(mydata,connection,db,collection)
+
 #id = "5cb0e141bc216d25ac165922"
 #mydataupd = { 'name': "Carlitos tevez", 'address': "Apple st 652"}
 #ejemplo = crud.crud.find('5cb0bd8bbc216d283c871b20')
