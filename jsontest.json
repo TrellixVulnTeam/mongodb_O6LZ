@@ -1,0 +1,19 @@
+{
+    "sensor": {
+        "type": "unknown",
+        "notifications": "off",
+        "timeout": "0",
+        "featureset": {
+            "features": [
+                {
+                    "name": "Temp",
+                    "enabled": "No"
+                },
+                {
+                    "name": "Humidity",
+                    "enabled": "No"
+                }
+            ]
+        }
+    }
+}

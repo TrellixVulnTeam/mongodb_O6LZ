@@ -1,13 +1,46 @@
 import pymongo
 from bson.objectid import ObjectId
+import json
 
+class connectionobj(object):
+
+  def __init__(self,connectionobj,dbobj):
+        self.connection = connectionobj
+        self.db = dbobj
+
+  def connectiontes(self):
+    self.myclient = pymongo.MongoClient(self.connection) 
+    self.mydb = self.myclient[self.db]
+    return "start connection"
+  
+  def coleccion(self,col):
+    return self.mydb[col]        
+ 
+  def close(self):
+    self.myclient.close()
+
+  def insert(self,data,col): 
+      return self.mydb[col].insert_one(data)
+  
+  def insertmult(self,data,col):
+      return self.mydb[col].insert_many(data)
+
+  def update(self,id,data,col):
+      if(find(id,col) == "none"):
+          return "none"
+      return self.mydb[col].update_one({'_id': ObjectId(id)}, {"$set": data})
+
+  def remove_data(self,id,col):
+      if(find(id,col) == "none"):
+          return "none"
+      return self.mydb[col].delete_one({'_id':ObjectId(id)})
+
+  def find(self,id,col):
+      for x in self.mydb[col].find({'_id':ObjectId(id)}):
+          return x
+      return "none"
+ 
 #myclient = pymongo.MongoClient("mongodb+srv://juangui:Juan5157@clustertesting-yew86.azure.mongodb.net/test?retryWrites=true")
-#mydb = myclient.pruebaseti
-
-
-#client = pymongo.MongoClient("mongodb+srv://juangui:<password>@test-uy8l8.mongodb.net/test?retryWrites=true")
-#db = client.test
-
 #myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 ''' mydb = myclient["mydatabase"]
 mycollection = mydb["mycollection"]
@@ -19,62 +52,3 @@ if "mydatabase" in dblist:
 collist = mydb.list_collection_names()
 if "mycollection" in collist:
   print("The collection exists.") '''
-
-def connectionobj(connection, db, collection):
-  myclient = pymongo.MongoClient(connection) 
-  dblist = myclient.list_database_names()
-  if "mydatabase" in dblist:
-    mydb = myclient[db]
-  else:
-    mydb = myclient[db]
-  collist = mydb.list_collection_names()
-  if "mycollection" in collist:
-    mycollection = mydb[collection]
-  else:
-    mycollection = mydb[collection]
-    mycollection.insert_many({'Name':"testonlytest"})
-    mycollection.delete_one({'Name':"testonlytest"})
-  return mycollection, myclient
-      
-
-def insert(data,connection,db,collection):
-    mycollection,myclient = connectionobj(connection, db, collection)   
-    mycollection.insert_one(data)
-    myclient.close()
-    return "insertado"
- 
-def insertmult(data,connection,db,collection):
-    mycollection,myclient = connectionobj(connection, db, collection) 
-    mycollection.insert_many(data)
-    myclient.close()
-    return "insertado multiples"
-
-def update(id,data,connection,db,collection):
-    mycollection,myclient = connectionobj(connection, db, collection) 
-    if(find(id) == "none"):
-        myclient.close()
-        return "Dato no existe"
-    mycollection.update_one({'_id': ObjectId(id)}, {"$set": data})
-    myclient.close()
-    return "Actualizado"
-
-
-def remove_data(id,connection,db,collection):
-    mycollection,myclient = connectionobj(connection, db, collection) 
-    if(find(id) == "none"):
-        myclient.close()
-        return "Dato no existe"
-    mycollection.delete_one({'_id':ObjectId(id)})
-    myclient.close()
-    return "eliminado"
-
-
-def find(id,connection,db,collection):
-    mycollection,myclient = connectionobj(connection, db, collection) 
-    for x in mycollection.find({'_id':ObjectId(id)}):
-        myclient.close()
-        return x
-    myclient.close()
-    return "none"
- 
-

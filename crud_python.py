@@ -1,16 +1,32 @@
-import crud.crud
+#import crud.crud
+from crud.crud import *
 
-mydata = {'Name':"pruebaconeccioncerrada"}
 connection = "mongodb+srv://juangui:Juan5157@clustertesting-yew86.azure.mongodb.net/test?retryWrites=true"
 db= "mydatabase"
 collection = "mycollection"
+test = connectionobj(connection,db)
 
-ejemplo = crud.crud.insert(mydata,connection,db,collection)
+ejemplo = test.connectiontes()
+print(ejemplo)
+
+mydata = {'Name':"pruebaconclase"}
+ejemplo = test.insert(mydata,collection)
+print(ejemplo)
+
+mydata = {'Name':"pruebaconclase2"}
+ejemplo = test.insert(mydata,collection)
+print(ejemplo)
+
+with open('jsontest.json') as template:
+        template_dct = json.load(template)
+
+ejemplo = test.insert(template_dct,collection)
+
+test.close()
 
 #id = "5cb0e141bc216d25ac165922"
 #mydataupd = { 'name': "Carlitos tevez", 'address': "Apple st 652"}
 #ejemplo = crud.crud.find('5cb0bd8bbc216d283c871b20')
-
 #ejemplo = crud.crud.remove_data(id)
 #print(ejemplo)
 ''' mylist = [
@@ -27,13 +43,7 @@ ejemplo = crud.crud.insert(mydata,connection,db,collection)
   { "name": "Chuck", "address": "Main Road 989"},
   { "name": "Viola", "address": "Sideway 1633"}
 ]
-
 ejemplo = crud.crud.insertmult(mylist) '''
-
 #data = { "address": 0 }
-
 #ejemplo = crud.crud.find(id)
-
-print(ejemplo)
-
-
+#print(ejemplo)
