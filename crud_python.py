@@ -1,10 +1,10 @@
 #import crud.crud
 from crud.crud import *
 
-connection = "mongodb+srv://juangui:Juan5157@clustertesting-yew86.azure.mongodb.net/test?retryWrites=true"
+connection = "mongodb+srv://juangui:Juan5157@cluster0-yew86.azure.mongodb.net/test?retryWrites=true"
 db= "mydatabase"
 collection = "mycollection"
-test = connectionobj(connection,db)
+test = connectionobj("juangui","Juan5157","cluster0-yew86.azure.mongodb.net/test?retryWrites=true",connection,db,1,3)
 
 ejemplo = test.connectiontes()
 print(ejemplo)
