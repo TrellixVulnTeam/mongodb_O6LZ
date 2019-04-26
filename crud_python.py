@@ -1,8 +1,7 @@
 #import crud.crud
 from crud.crud import *
 
-connection = "mongodb+srv://juangui:Juan5157@cluster0-yew86.azure.mongodb.net/test?retryWrites=true"
-connection = "mongodb://52.90.145.195:27017"
+connection = "mongodb://<mongoip>:<mongoport>"
 db= "mydatabase"
 collection = "mycollection"
 test = connectionobj(connection,db,1,3)
